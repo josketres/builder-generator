@@ -1,0 +1,24 @@
+builder(name,qualifiedName,properties) ::= "import <qualifiedName>;
+
+public final class <name>Builder { 
+    <properties:declaration()>
+    private <name>Builder() { }
+    
+    public static <name>Builder a<name>() {
+        return new <name>Builder();
+    }
+
+    public <name> build() {
+        <name> object = new <name>();
+        <properties:build()>
+        return object;
+    }
+
+    <properties:setter()>
+}"
+declaration(property) ::= "private <property.type> <property.name>;<\n>"
+setter(property) ::= "public <name>Builder <property.name>(<property.type> <property.name>) {
+    this.<property.name> = <property.name>;
+    return this;
+}"
+build(property) ::= "object.<property.setterName>(<property.name>);"
