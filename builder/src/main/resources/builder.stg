@@ -1,24 +1,25 @@
-builder(name,qualifiedName,properties) ::= "import <qualifiedName>;
+builder(data) ::= "import <data.qualifiedName>;
+<data.properties:import_property()>
 
-public final class <name>Builder { 
-    <properties:declaration()>
-    private <name>Builder() { }
+public final class <data.name>Builder { 
+    <data.properties:declaration()>
+    private <data.name>Builder() { }
     
-    public static <name>Builder a<name>() {
-        return new <name>Builder();
+    public static <data.name>Builder a<data.name>() {
+        return new <data.name>Builder();
     }
 
-    public <name> build() {
-        <name> object = new <name>();
-        <properties:build()>
+    public <data.name> build() {
+        <data.name> object = new <data.name>();
+        <data.properties:build()>
         return object;
     }
-
-    <properties:setter()>
+    <data.properties:setter()>
 }"
 declaration(property) ::= "private <property.type> <property.name>;<\n>"
-setter(property) ::= "public <name>Builder <property.name>(<property.type> <property.name>) {
+setter(property) ::= "<\n>public <data.name>Builder <property.name>(<property.type> <property.name>) {
     this.<property.name> = <property.name>;
     return this;
-}"
-build(property) ::= "object.<property.setterName>(<property.name>);"
+}<\n>"
+build(property) ::= "object.<property.setterName>(<property.name>);<\n>"
+import_property(property) ::= "<if(property.shouldBeImported)>import <property.qualifiedName>;<\n><endif>"
