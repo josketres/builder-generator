@@ -8,6 +8,7 @@ public class TargetClass {
 
     private String name;
     private String qualifiedName;
+    private String packageName;
     private List<Property> properties;
 
     public TargetClass() {
@@ -38,4 +39,13 @@ public class TargetClass {
         properties.add(property);
         Collections.sort(properties);
     }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
 }

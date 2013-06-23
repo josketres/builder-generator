@@ -26,7 +26,15 @@ public class RendererTest {
         root.delete();
         root.mkdirs();
 
-        File sourceFile = new File(root, NormalJavaBean.class.getName()
+        String packageDirs =
+                NormalJavaBean.class.getPackage().getName()
+                        .replace(".", System.getProperty("file.separator"));
+
+        File packageFolder = new File(root, packageDirs);
+        packageFolder.mkdirs();
+
+        File sourceFile = new File(packageFolder, NormalJavaBean.class
+                .getName()
                 .replace(".", "/") + "Builder.java");
         sourceFile.getParentFile().mkdirs();
         FileWriter fileWriter = null;

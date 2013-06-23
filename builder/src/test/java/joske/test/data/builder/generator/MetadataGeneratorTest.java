@@ -29,13 +29,14 @@ public class MetadataGeneratorTest {
         TargetClass data = gen.getMetadata();
         assertEquals(NormalJavaBean.class.getSimpleName(), data.getName());
         assertEquals(NormalJavaBean.class.getName(), data.getQualifiedName());
+        assertEquals(NormalJavaBean.class.getPackage().getName(), data.getPackageName());
 
         List<Property> properties = data.getProperties();
-        propertyIs(properties.get(0), Address.class, "address", "setAddress",true);
+        propertyIs(properties.get(0), Address.class, "address", "setAddress", false);
         propertyIs(properties.get(1), int.class, "age", "setAge", false);
         propertyIs(properties.get(2), Date.class, "date", "setDate", true);
         propertyIs(properties.get(3), String.class, "name", "setName", false);
-        
+
         assertEquals(4, properties.size());
     }
 

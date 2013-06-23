@@ -1,6 +1,8 @@
-builder(data) ::= "import <data.qualifiedName>;
-<data.properties:import_property()>
+builder(data) ::= <<
+package <data.packageName>;
 
+import <data.qualifiedName>;
+<data.properties:import_property()>
 public final class <data.name>Builder { 
     <data.properties:declaration()>
     private <data.name>Builder() { }
@@ -15,11 +17,15 @@ public final class <data.name>Builder {
         return object;
     }
     <data.properties:setter()>
-}"
+}>>
 declaration(property) ::= "private <property.type> <property.name>;<\n>"
-setter(property) ::= "<\n>public <data.name>Builder <property.name>(<property.type> <property.name>) {
+setter(property) ::= <<
+
+
+public <data.name>Builder <property.name>(<property.type> <property.name>) {
     this.<property.name> = <property.name>;
     return this;
-}<\n>"
+}
+>>
 build(property) ::= "object.<property.setterName>(<property.name>);<\n>"
 import_property(property) ::= "<if(property.shouldBeImported)>import <property.qualifiedName>;<\n><endif>"

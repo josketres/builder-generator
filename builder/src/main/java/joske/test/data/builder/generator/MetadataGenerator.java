@@ -1,6 +1,7 @@
 package joske.test.data.builder.generator;
 
 import java.beans.PropertyDescriptor;
+import java.util.Arrays;
 
 import joske.test.data.builder.generator.model.Property;
 import joske.test.data.builder.generator.model.TargetClass;
@@ -8,7 +9,6 @@ import joske.test.data.builder.generator.model.TargetClass;
 import org.apache.commons.beanutils.PropertyUtils;
 
 public class MetadataGenerator {
-
     private TargetClass data;
     private Class<?> targetClass;
 
@@ -20,6 +20,7 @@ public class MetadataGenerator {
         data = new TargetClass();
         data.setName(targetClass.getSimpleName());
         data.setQualifiedName(targetClass.getName());
+        data.setPackageName(targetClass.getPackage().getName());
         addProperties();
         return data;
     }
@@ -27,6 +28,7 @@ public class MetadataGenerator {
     private void addProperties() {
         PropertyDescriptor[] desc = PropertyUtils
                 .getPropertyDescriptors(targetClass);
+        System.out.println(Arrays.toString(desc));
         for (PropertyDescriptor descriptor : desc) {
             Property property = extractPropertyMetadata(descriptor);
             if (property != null) {
@@ -37,7 +39,8 @@ public class MetadataGenerator {
 
     private Property extractPropertyMetadata(PropertyDescriptor descriptor) {
         Property property = null;
-        if (!descriptor.getPropertyType().equals(Class.class)
+        if (descriptor != null
+                && !descriptor.getPropertyType().equals(Class.class)
                 && descriptor.getWriteMethod() != null) {
             Class<?> type = descriptor.getPropertyType();
             String name = descriptor.getName();
@@ -54,7 +57,7 @@ public class MetadataGenerator {
     private boolean shouldBeImported(Class<?> type) {
 
         if (type.getPackage() != null
-                // && !type.getPackage().equals(targetClass.getPackage())
+                && !type.getPackage().equals(targetClass.getPackage())
                 && !type.getPackage().equals(String.class.getPackage())) {
             return true;
         }
