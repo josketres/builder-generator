@@ -13,11 +13,12 @@ import org.junit.Test;
 import test.classes.Address;
 import test.classes.NormalJavaBean;
 
-public class MetadataGeneratorTest {
+
+public class MetadataExtractorTest {
 
     @Test
     public void shouldGenerateMetadataOfTargetClass() {
-        MetadataGenerator gen = new MetadataGenerator(NormalJavaBean.class);
+        MetadataExtractor gen = new MetadataExtractor(NormalJavaBean.class);
         TargetClass data = gen.getMetadata();
         assertEquals(NormalJavaBean.class.getSimpleName(), data.getName());
         assertEquals(NormalJavaBean.class.getName(), data.getQualifiedName());
@@ -25,7 +26,7 @@ public class MetadataGeneratorTest {
 
     @Test
     public void shouldGeneratePropertiesMetadata() throws Exception {
-        MetadataGenerator gen = new MetadataGenerator(NormalJavaBean.class);
+        MetadataExtractor gen = new MetadataExtractor(NormalJavaBean.class);
         TargetClass data = gen.getMetadata();
         assertEquals(NormalJavaBean.class.getSimpleName(), data.getName());
         assertEquals(NormalJavaBean.class.getName(), data.getQualifiedName());

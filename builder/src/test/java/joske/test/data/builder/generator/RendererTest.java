@@ -12,12 +12,13 @@ import org.junit.Test;
 
 import test.classes.NormalJavaBean;
 
+
 public class RendererTest {
     private static final int COMPILER_SUCCESS_CODE = 0;
 
     @Test
     public void test() throws IOException {
-        MetadataGenerator generator = new MetadataGenerator(
+        MetadataExtractor generator = new MetadataExtractor(
                 NormalJavaBean.class);
         String source = new Renderer().render(generator.getMetadata());
         System.out.println(source);

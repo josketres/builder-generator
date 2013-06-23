@@ -1,18 +1,17 @@
 package joske.test.data.builder.generator;
 
 import java.beans.PropertyDescriptor;
-import java.util.Arrays;
 
 import joske.test.data.builder.generator.model.Property;
 import joske.test.data.builder.generator.model.TargetClass;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
-public class MetadataGenerator {
+public class MetadataExtractor {
     private TargetClass data;
     private Class<?> targetClass;
 
-    public MetadataGenerator(Class<?> targetClass) {
+    public MetadataExtractor(Class<?> targetClass) {
         this.targetClass = targetClass;
     }
 
@@ -28,7 +27,6 @@ public class MetadataGenerator {
     private void addProperties() {
         PropertyDescriptor[] desc = PropertyUtils
                 .getPropertyDescriptors(targetClass);
-        System.out.println(Arrays.toString(desc));
         for (PropertyDescriptor descriptor : desc) {
             Property property = extractPropertyMetadata(descriptor);
             if (property != null) {
