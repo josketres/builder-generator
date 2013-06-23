@@ -12,9 +12,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import joske.test.data.builder.generator.MetadataExtractor;
-import joske.test.data.builder.generator.Renderer;
-import joske.test.data.builder.generator.model.TargetClass;
+import joske.test.data.builder.generator.Generator;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -93,9 +91,7 @@ public class GenerateHandler extends AbstractHandler {
             e.printStackTrace();
         }
         
-        TargetClass metadata = new MetadataExtractor(targetClass).getMetadata();
-        String source = new Renderer().render(metadata);
-        
+        String source = new Generator().generate(targetClass);
         BufferedWriter writer = null;
         try {
             cu.getCorrespondingResource().getName();
