@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/joske.test.data.builder.generator.feature_1.0.0.qualifier.jar" id="joske.test.data.builder.generator.feature" version="1.0.0.qualifier">
-      <category name="Josketres"/>
-   </feature>
    <category-def name="Josketres" label="Josketres"/>
 </site>

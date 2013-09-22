@@ -11,12 +11,6 @@
       </command>
    </extension>
    <extension
-         point="org.eclipse.ui.handlers">
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-   </extension>
-   <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
